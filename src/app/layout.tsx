@@ -1,6 +1,9 @@
 import React from 'react'
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import './globals.css'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Korean Beast Gym - 코비짐 | MaxFC 챔피언 김준화',
@@ -15,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body className={inter.className}>{children}</body>
     </html>
   )
 } 
