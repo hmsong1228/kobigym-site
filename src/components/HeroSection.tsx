@@ -36,20 +36,26 @@ export default function HeroSection() {
 
             {/* Description */}
             <p className="text-base break-words whitespace-normal max-w-full leading-snug px-4 text-center md:text-xl lg:text-2xl text-gray-300 mb-5 md:mb-7 md:leading-relaxed md:text-left md:px-0 md:max-w-2xl animate-fade-in-up animation-delay-200 md:animation-delay-400">
-              MAXFC 2체급 챔피언 김준화가 운영하는 병점 유일 격투 체육관
+              <span className="md:hidden">
+                MAXFC 2체급 챔피언 김준화가 운영하는<br />
+                병점 유일 격투 체육관
+              </span>
+              <span className="hidden md:inline">
+                MAXFC 2체급 챔피언 김준화가 운영하는 병점 유일 격투 체육관
+              </span>
             </p>
 
             {/* CTA Buttons */}
             <div className="w-full max-w-[90%] flex flex-col md:flex-row gap-3 md:gap-6 items-center md:items-start animate-fade-in-up animation-delay-300 md:animation-delay-600">
               <a 
                 href="#contact" 
-                className="w-48 h-12 md:w-56 md:h-14 bg-beast-red hover:bg-red-700 text-white font-bold py-4 px-6 md:py-4 md:px-8 rounded-lg text-base md:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center whitespace-nowrap"
+                className="w-full md:w-56 h-12 md:h-14 bg-beast-red hover:bg-red-700 text-white font-bold py-4 px-6 md:py-4 md:px-8 rounded-lg text-base md:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center whitespace-nowrap"
               >
                 지금 무료 상담하기
               </a>
               <button 
                 onClick={openModal}
-                className="w-48 h-12 md:w-56 md:h-14 bg-white/10 hover:bg-white hover:text-black border-2 border-white text-white font-bold py-4 px-6 md:py-4 md:px-8 rounded-lg text-base md:text-lg transition-all duration-300 backdrop-blur-sm flex items-center justify-center gap-2 whitespace-nowrap"
+                className="w-full md:w-56 h-12 md:h-14 bg-white/10 hover:bg-white hover:text-black border-2 border-white text-white font-bold py-4 px-6 md:py-4 md:px-8 rounded-lg text-base md:text-lg transition-all duration-300 backdrop-blur-sm flex items-center justify-center gap-2 whitespace-nowrap"
               >
                 <span className="text-lg hidden md:inline">▶</span>
                 하이라이트 영상 보기
