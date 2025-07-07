@@ -23,24 +23,24 @@ export default function HeroSection() {
 
         {/* Content Container */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="max-w-3xl animate-fade-in">
+          <div className="max-w-3xl">
             {/* Main Heading */}
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-beast-red mb-4 tracking-tight leading-tight">
+            <h1 className="text-6xl sm:text-7xl md:text-7xl lg:text-8xl font-black text-beast-red mb-4 tracking-tight leading-tight animate-fade-in-up">
               KOBY GYM
             </h1>
 
             {/* Subtitle */}
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-7 leading-relaxed">
+            <h2 className="text-3xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-white mb-7 leading-relaxed animate-fade-in-up animation-delay-200">
               복싱 · 킥복싱 · 주짓수 · 크로스핏
             </h2>
 
             {/* Description */}
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-300 mb-7 leading-relaxed max-w-2xl">
+            <p className="text-lg md:text-xl lg:text-2xl text-gray-300 mb-7 leading-relaxed max-w-2xl animate-fade-in-up animation-delay-400">
               MAXFC 2체급 챔피언 김준화가 운영하는 병점 유일 격투 체육관
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 animate-fade-in-up animation-delay-600">
               <a 
                 href="#contact" 
                 className="bg-beast-red hover:bg-red-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg text-center"
@@ -49,8 +49,9 @@ export default function HeroSection() {
               </a>
               <button 
                 onClick={openModal}
-                className="border-2 border-white text-white hover:bg-white hover:text-beast-dark font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 text-center"
+                className="bg-white/10 hover:bg-white/20 border-2 border-white text-white hover:text-white font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 text-center backdrop-blur-sm flex items-center justify-center gap-2"
               >
+                <span className="text-xl">▶</span>
                 하이라이트 영상 보기
               </button>
             </div>
@@ -71,7 +72,7 @@ export default function HeroSection() {
           <div className="relative w-full max-w-4xl mx-4 aspect-video">
             <button
               onClick={closeModal}
-              className="absolute -top-12 right-0 text-white hover:text-beast-red text-2xl font-bold z-10"
+              className="absolute -top-16 right-0 bg-white/90 hover:bg-white text-black hover:text-beast-red text-xl font-bold z-10 px-4 py-2 rounded-lg border-2 border-white/50 backdrop-blur-sm transition-all duration-300"
             >
               ✕ 닫기
             </button>
@@ -90,7 +91,7 @@ export default function HeroSection() {
       )}
 
       <style jsx>{`
-        @keyframes fade-in {
+        @keyframes fade-in-up {
           from {
             opacity: 0;
             transform: translateY(30px);
@@ -101,8 +102,21 @@ export default function HeroSection() {
           }
         }
         
-        .animate-fade-in {
-          animation: fade-in 1s ease-out;
+        .animate-fade-in-up {
+          animation: fade-in-up 0.8s ease-out forwards;
+          opacity: 0;
+        }
+
+        .animation-delay-200 {
+          animation-delay: 0.2s;
+        }
+
+        .animation-delay-400 {
+          animation-delay: 0.4s;
+        }
+
+        .animation-delay-600 {
+          animation-delay: 0.6s;
         }
       `}</style>
     </>
