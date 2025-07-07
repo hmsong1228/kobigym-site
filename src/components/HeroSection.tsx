@@ -25,17 +25,17 @@ export default function HeroSection() {
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8">
           <div className="max-w-3xl animate-fade-in">
             {/* Main Heading */}
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-beast-red mb-4 tracking-tight leading-tight">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-beast-red mb-6 tracking-tight leading-tight">
               KOBY GYM
             </h1>
 
             {/* Subtitle */}
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mt-2 mb-8 leading-relaxed">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-7 leading-relaxed">
               복싱 · 킥복싱 · 주짓수 · 크로스핏
             </h2>
 
             {/* Description */}
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-300 mb-12 leading-relaxed max-w-2xl">
+            <p className="text-lg md:text-xl lg:text-2xl text-gray-300 mb-7 leading-relaxed max-w-2xl">
               MAXFC 2체급 챔피언 김준화가 운영하는 병점 유일 격투 체육관
             </p>
 
