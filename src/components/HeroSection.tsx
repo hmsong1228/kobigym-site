@@ -5,12 +5,18 @@ import React, { useState } from 'react'
 export default function HeroSection() {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const handleVideoClick = () => {
+  const handleVideoClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
     console.log('Video button clicked!') // 디버깅용
     setIsModalOpen(true)
   }
   
-  const handleCloseModal = () => {
+  const handleCloseModal = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
     console.log('Closing modal...') // 디버깅용
     setIsModalOpen(false)
   }
@@ -32,18 +38,18 @@ export default function HeroSection() {
         {/* Content Container */}
         <div className="relative z-10 w-full max-w-screen-sm sm:max-w-2xl md:max-w-4xl lg:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="w-full max-w-full md:max-w-3xl flex flex-col items-center md:items-start">
-            {/* Main Heading */}
-            <h1 className="w-full max-w-[95%] text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-beast-red mb-2 md:mb-4 tracking-tight leading-tight text-center md:text-left break-words whitespace-normal animate-fade-in-up" style={{ fontWeight: '900' }}>
+            {/* Main Heading - 더 굵게 */}
+            <h1 className="w-full max-w-[95%] text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-beast-red tracking-tight leading-tight text-center md:text-left break-words whitespace-normal animate-fade-in-up" style={{ fontWeight: '950', marginBottom: '28px' }}>
               KOBY GYM
             </h1>
 
-            {/* Subtitle */}
-            <h2 className="w-full max-w-[95%] text-xl sm:text-xl md:text-3xl lg:text-4xl font-bold text-white mb-3 md:mb-7 leading-relaxed text-center md:text-left break-words whitespace-normal animate-fade-in-up animation-delay-100 md:animation-delay-200" style={{ fontWeight: '700' }}>
+            {/* Subtitle - 더 굵게 */}
+            <h2 className="w-full max-w-[95%] text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-relaxed text-center md:text-left break-words whitespace-normal animate-fade-in-up animation-delay-100 md:animation-delay-200" style={{ fontWeight: '850', marginBottom: '28px' }}>
               복싱 · 킥복싱 · 주짓수 · 크로스핏
             </h2>
 
-            {/* Description */}
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium break-words whitespace-normal max-w-[95%] leading-snug px-2 text-center md:leading-relaxed md:text-left md:px-0 md:max-w-2xl text-gray-300 mb-5 md:mb-7 animate-fade-in-up animation-delay-200 md:animation-delay-400" style={{ fontWeight: '500' }}>
+            {/* Description - 더 굵게 */}
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold break-words whitespace-normal max-w-[95%] leading-snug px-2 text-center md:leading-relaxed md:text-left md:px-0 md:max-w-2xl text-gray-300 animate-fade-in-up animation-delay-200 md:animation-delay-400" style={{ fontWeight: '700', marginBottom: '28px' }}>
               <span className="md:hidden">
                 MAXFC 2체급 챔피언 김준화가 운영하는<br />
                 병점 유일 격투기 체육관
@@ -54,20 +60,21 @@ export default function HeroSection() {
             </p>
 
             {/* CTA Buttons */}
-            <div className="w-full max-w-[95%] flex flex-col md:flex-row gap-3 md:gap-6 items-center md:items-start animate-fade-in-up animation-delay-300 md:animation-delay-600">
+            <div className="w-full max-w-[95%] flex flex-col md:flex-row items-center md:items-start animate-fade-in-up animation-delay-300 md:animation-delay-600" style={{ gap: '28px' }}>
               <a 
                 href="#contact" 
                 className="w-full md:w-56 h-12 md:h-14 bg-beast-red hover:bg-red-700 text-white font-bold py-3 px-4 md:py-4 md:px-8 rounded-lg text-base md:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center whitespace-nowrap"
-                style={{ fontWeight: '700' }}
+                style={{ fontWeight: '800' }}
               >
                 지금 무료 상담하기
               </a>
               
-              {/* 영상 버튼 - 단순화된 버전 */}
+              {/* 영상 버튼 */}
               <button 
                 onClick={handleVideoClick}
-                className="w-full md:w-56 h-12 md:h-14 bg-white/20 hover:bg-white hover:text-black border-2 border-white text-white font-bold py-3 px-4 md:py-4 md:px-8 rounded-lg text-base md:text-lg transition-all duration-300 backdrop-blur-sm flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer relative z-20"
-                style={{ fontWeight: '700' }}
+                onMouseDown={(e) => e.preventDefault()}
+                className="w-full md:w-56 h-12 md:h-14 bg-white/20 hover:bg-white hover:text-black border-2 border-white text-white font-bold py-3 px-4 md:py-4 md:px-8 rounded-lg text-base md:text-lg transition-all duration-300 backdrop-blur-sm flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer relative z-30"
+                style={{ fontWeight: '800' }}
                 type="button"
               >
                 <span className="text-lg hidden md:inline">▶</span>
@@ -99,7 +106,7 @@ export default function HeroSection() {
               onClick={handleCloseModal}
               type="button"
               className="absolute -top-12 md:-top-16 right-0 bg-white text-black w-10 h-10 md:w-auto md:h-auto md:px-4 md:py-2 rounded-lg shadow-lg font-bold z-20 flex items-center justify-center transition-all duration-300 hover:bg-gray-100 cursor-pointer"
-              style={{ fontWeight: '700' }}
+              style={{ fontWeight: '800' }}
             >
               <span className="md:hidden">✕</span>
               <span className="hidden md:inline">✕ 닫기</span>
@@ -159,21 +166,30 @@ export default function HeroSection() {
           animation-delay: 0.6s;
         }
 
-        /* 폰트 굵기 강제 적용 */
+        /* 폰트 굵기 더 강하게 적용 */
         h1 {
-          font-weight: 900 !important;
+          font-weight: 950 !important;
+          font-family: 'Pretendard', sans-serif !important;
         }
         
         h2 {
+          font-weight: 850 !important;
+          font-family: 'Pretendard', sans-serif !important;
+        }
+        
+        p {
           font-weight: 700 !important;
+          font-family: 'Pretendard', sans-serif !important;
         }
         
         .font-bold {
-          font-weight: 700 !important;
+          font-weight: 800 !important;
+          font-family: 'Pretendard', sans-serif !important;
         }
         
-        .font-medium {
-          font-weight: 500 !important;
+        .font-semibold {
+          font-weight: 700 !important;
+          font-family: 'Pretendard', sans-serif !important;
         }
 
         /* iframe 로딩 개선 */
@@ -185,6 +201,7 @@ export default function HeroSection() {
         /* 버튼 클릭 확실히 하기 */
         button {
           pointer-events: auto !important;
+          font-family: 'Pretendard', sans-serif !important;
         }
       `}</style>
     </>
