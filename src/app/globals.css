@@ -2,66 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Pretendard 폰트 - 여러 소스로 로딩 */
-@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap');
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
-
-/* 폰트 페이스 직접 정의 (백업용) */
+/* 폰트 로딩 최적화 - preload 방식 */
 @font-face {
   font-family: 'Pretendard';
   font-weight: 400;
-  font-display: swap;
-  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-Regular.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff/Pretendard-Regular.woff') format('woff');
+  font-display: block;
+  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-Regular.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Pretendard';
   font-weight: 500;
-  font-display: swap;
-  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-Medium.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff/Pretendard-Medium.woff') format('woff');
+  font-display: block;
+  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-Medium.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Pretendard';
   font-weight: 600;
-  font-display: swap;
-  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-SemiBold.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff/Pretendard-SemiBold.woff') format('woff');
+  font-display: block;
+  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-SemiBold.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Pretendard';
   font-weight: 700;
-  font-display: swap;
-  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-Bold.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff/Pretendard-Bold.woff') format('woff');
+  font-display: block;
+  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-Bold.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Pretendard';
   font-weight: 800;
-  font-display: swap;
-  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-ExtraBold.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff/Pretendard-ExtraBold.woff') format('woff');
+  font-display: block;
+  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-ExtraBold.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Pretendard';
   font-weight: 900;
-  font-display: swap;
-  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-Black.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff/Pretendard-Black.woff') format('woff');
+  font-display: block;
+  src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/woff2/Pretendard-Black.woff2') format('woff2');
 }
 
 :root {
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 15, 15, 15;
   --background-end-rgb: 31, 31, 31;
-  
-  /* 폰트 변수 추가 */
-  --font-pretendard: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  --font-pretendard: 'Pretendard', system-ui, -apple-system, sans-serif;
 }
 
 * {
@@ -70,10 +58,16 @@
   margin: 0;
 }
 
+/* 폰트 로딩 중 깜빡임 방지 */
 html {
   font-family: var(--font-pretendard) !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  visibility: hidden;
+}
+
+html.fonts-loaded {
+  visibility: visible;
 }
 
 html,
@@ -101,87 +95,34 @@ a {
 }
 
 /* 모든 텍스트 요소에 폰트 강제 적용 */
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, p, span, div, button, a {
   font-family: var(--font-pretendard) !important;
 }
 
-p, span, div, button, a, input, textarea, select {
-  font-family: var(--font-pretendard) !important;
-}
-
-/* 폰트 굵기별 클래스 정의 */
-.font-regular {
-  font-weight: 400 !important;
-}
-
-.font-medium {
-  font-weight: 500 !important;
-}
-
-.font-semibold {
-  font-weight: 600 !important;
-}
-
-.font-bold {
-  font-weight: 700 !important;
+/* 폰트 굵기 클래스 */
+.font-black {
+  font-weight: 900 !important;
 }
 
 .font-extrabold {
   font-weight: 800 !important;
 }
 
-.font-black {
-  font-weight: 900 !important;
+.font-bold {
+  font-weight: 700 !important;
 }
 
-/* Tailwind 폰트 클래스 오버라이드 */
-.text-5xl, .text-6xl, .text-7xl, .text-8xl {
-  font-family: var(--font-pretendard) !important;
+.font-semibold {
+  font-weight: 600 !important;
 }
 
-.text-xl, .text-2xl, .text-3xl, .text-4xl {
-  font-family: var(--font-pretendard) !important;
-}
-
-.text-base, .text-lg {
-  font-family: var(--font-pretendard) !important;
-}
-
-/* 버튼 및 인터랙티브 요소 */
-button, .btn, [role="button"] {
-  font-family: var(--font-pretendard) !important;
-}
-
-/* 폰트 로딩 최적화 */
-.font-loading {
-  font-display: swap;
+.font-medium {
+  font-weight: 500 !important;
 }
 
 /* 다크 모드 지원 */
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
-  }
-}
-
-/* 폰트 렌더링 최적화 */
-* {
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* 개발 환경에서 폰트 로딩 확인용 */
-@media screen {
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    pointer-events: none;
-    z-index: -1;
   }
 }

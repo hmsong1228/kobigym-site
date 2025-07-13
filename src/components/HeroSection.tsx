@@ -1,14 +1,29 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 export default function HeroSection() {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [fontsLoaded, setFontsLoaded] = useState(false)
+
+  useEffect(() => {
+    // 폰트 로딩 완료 후 애니메이션 시작
+    const checkFonts = async () => {
+      try {
+        await document.fonts.ready
+        setFontsLoaded(true)
+      } catch (error) {
+        // 폰트 로딩 실패 시에도 3초 후 표시
+        setTimeout(() => setFontsLoaded(true), 3000)
+      }
+    }
+    checkFonts()
+  }, [])
 
   const handleVideoClick = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    console.log('Video button clicked!') // 디버깅용
+    console.log('Video button clicked!')
     setIsModalOpen(true)
   }
   
@@ -17,7 +32,7 @@ export default function HeroSection() {
       e.preventDefault()
       e.stopPropagation()
     }
-    console.log('Closing modal...') // 디버깅용
+    console.log('Closing modal...')
     setIsModalOpen(false)
   }
 
@@ -35,21 +50,44 @@ export default function HeroSection() {
           <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/20 to-black/30"></div>
         </div>
 
-        {/* Content Container */}
+        {/* Content Container - PC에서 더 왼쪽으로 이동 + 아래로 이동 */}
         <div className="relative z-10 w-full max-w-screen-sm sm:max-w-2xl md:max-w-4xl lg:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="w-full max-w-full md:max-w-3xl flex flex-col items-center md:items-start">
-            {/* Main Heading - 더 굵게 */}
-            <h1 className="w-full max-w-[95%] text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-beast-red tracking-tight leading-tight text-center md:text-left break-words whitespace-normal animate-fade-in-up" style={{ fontWeight: '950', marginBottom: '28px' }}>
+          <div 
+            className={`w-full max-w-full md:max-w-3xl flex flex-col items-center md:items-start transition-opacity duration-800 md:-translate-x-20 lg:-translate-x-24 translate-y-8 md:translate-y-12 ${fontsLoaded ? 'animate-fade-in-up' : 'opacity-0'}`}
+          >
+            {/* Main Heading */}
+            <h1 
+              className="w-full max-w-[95%] text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-beast-red tracking-tight leading-tight text-center md:text-left break-words whitespace-normal"
+              style={{ 
+                fontWeight: '900',
+                marginBottom: '28px',
+                fontFamily: 'Pretendard, system-ui, sans-serif'
+              }}
+            >
               KOBY GYM
             </h1>
 
-            {/* Subtitle - 더 굵게 */}
-            <h2 className="w-full max-w-[95%] text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-relaxed text-center md:text-left break-words whitespace-normal animate-fade-in-up animation-delay-100 md:animation-delay-200" style={{ fontWeight: '850', marginBottom: '28px' }}>
+            {/* Subtitle */}
+            <h2 
+              className="w-full max-w-[95%] text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-relaxed text-center md:text-left break-words whitespace-normal"
+              style={{ 
+                fontWeight: '800',
+                marginBottom: '28px',
+                fontFamily: 'Pretendard, system-ui, sans-serif'
+              }}
+            >
               복싱 · 킥복싱 · 주짓수 · 크로스핏
             </h2>
 
-            {/* Description - 더 굵게 */}
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold break-words whitespace-normal max-w-[95%] leading-snug px-2 text-center md:leading-relaxed md:text-left md:px-0 md:max-w-2xl text-gray-300 animate-fade-in-up animation-delay-200 md:animation-delay-400" style={{ fontWeight: '700', marginBottom: '28px' }}>
+            {/* Description */}
+            <p 
+              className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold break-words whitespace-normal max-w-[95%] leading-snug px-2 text-center md:leading-relaxed md:text-left md:px-0 md:max-w-2xl text-gray-300"
+              style={{ 
+                fontWeight: '700',
+                marginBottom: '28px',
+                fontFamily: 'Pretendard, system-ui, sans-serif'
+              }}
+            >
               <span className="md:hidden">
                 MAXFC 2체급 챔피언 김준화가 운영하는<br />
                 병점 유일 격투기 체육관
@@ -60,21 +98,29 @@ export default function HeroSection() {
             </p>
 
             {/* CTA Buttons */}
-            <div className="w-full max-w-[95%] flex flex-col md:flex-row items-center md:items-start animate-fade-in-up animation-delay-300 md:animation-delay-600" style={{ gap: '28px' }}>
+            <div 
+              className="w-full max-w-[95%] flex flex-col md:flex-row items-center md:items-start"
+              style={{ gap: '28px' }}
+            >
               <a 
                 href="#contact" 
                 className="w-full md:w-56 h-12 md:h-14 bg-beast-red hover:bg-red-700 text-white font-bold py-3 px-4 md:py-4 md:px-8 rounded-lg text-base md:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center whitespace-nowrap"
-                style={{ fontWeight: '800' }}
+                style={{ 
+                  fontWeight: '800',
+                  fontFamily: 'Pretendard, system-ui, sans-serif'
+                }}
               >
                 지금 무료 상담하기
               </a>
               
-              {/* 영상 버튼 */}
               <button 
                 onClick={handleVideoClick}
                 onMouseDown={(e) => e.preventDefault()}
                 className="w-full md:w-56 h-12 md:h-14 bg-white/20 hover:bg-white hover:text-black border-2 border-white text-white font-bold py-3 px-4 md:py-4 md:px-8 rounded-lg text-base md:text-lg transition-all duration-300 backdrop-blur-sm flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer relative z-30"
-                style={{ fontWeight: '800' }}
+                style={{ 
+                  fontWeight: '800',
+                  fontFamily: 'Pretendard, system-ui, sans-serif'
+                }}
                 type="button"
               >
                 <span className="text-lg hidden md:inline">▶</span>
@@ -102,22 +148,40 @@ export default function HeroSection() {
             className="relative w-full max-w-4xl aspect-video bg-black rounded-lg overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* 닫기 버튼 - 영상 위 우상단 */}
+            <button
+              onClick={handleCloseModal}
+              type="button"
+              className="absolute top-4 right-4 bg-black bg-opacity-70 hover:bg-opacity-90 text-white w-10 h-10 rounded-full shadow-lg font-bold z-30 flex items-center justify-center transition-all duration-300 backdrop-blur-sm border border-white/20"
+              style={{ 
+                fontWeight: '800',
+                fontFamily: 'Pretendard, system-ui, sans-serif'
+              }}
+              title="영상 닫기"
+            >
+              ✕
+            </button>
+
+            {/* 추가 닫기 버튼 - 영상 외부 우상단 */}
             <button
               onClick={handleCloseModal}
               type="button"
               className="absolute -top-12 md:-top-16 right-0 bg-white text-black w-10 h-10 md:w-auto md:h-auto md:px-4 md:py-2 rounded-lg shadow-lg font-bold z-20 flex items-center justify-center transition-all duration-300 hover:bg-gray-100 cursor-pointer"
-              style={{ fontWeight: '800' }}
+              style={{ 
+                fontWeight: '800',
+                fontFamily: 'Pretendard, system-ui, sans-serif'
+              }}
             >
               <span className="md:hidden">✕</span>
               <span className="hidden md:inline">✕ 닫기</span>
             </button>
             
-            {/* 실제 작동하는 격투기 하이라이트 영상 */}
+            {/* 유튜브 영상 */}
             <div className="w-full h-full">
               <iframe
                 width="100%"
                 height="100%"
-                src="https://www.youtube.com/embed/yPYZpwSpKmA?autoplay=1&mute=1&rel=0&modestbranding=1&showinfo=0&controls=1"
+                src="https://www.youtube.com/embed/M3l4ZJY1lkY?autoplay=1&mute=1&rel=0&modestbranding=1&showinfo=0&controls=1"
                 title="KOBY GYM Highlight Video"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -143,65 +207,11 @@ export default function HeroSection() {
         
         .animate-fade-in-up {
           animation: fade-in-up 0.8s ease-out forwards;
-          opacity: 0;
         }
 
-        .animation-delay-100 {
-          animation-delay: 0.1s;
-        }
-
-        .animation-delay-200 {
-          animation-delay: 0.2s;
-        }
-
-        .animation-delay-300 {
-          animation-delay: 0.3s;
-        }
-
-        .animation-delay-400 {
-          animation-delay: 0.4s;
-        }
-
-        .animation-delay-600 {
-          animation-delay: 0.6s;
-        }
-
-        /* 폰트 굵기 더 강하게 적용 */
-        h1 {
-          font-weight: 950 !important;
-          font-family: 'Pretendard', sans-serif !important;
-        }
-        
-        h2 {
-          font-weight: 850 !important;
-          font-family: 'Pretendard', sans-serif !important;
-        }
-        
-        p {
-          font-weight: 700 !important;
-          font-family: 'Pretendard', sans-serif !important;
-        }
-        
-        .font-bold {
-          font-weight: 800 !important;
-          font-family: 'Pretendard', sans-serif !important;
-        }
-        
-        .font-semibold {
-          font-weight: 700 !important;
-          font-family: 'Pretendard', sans-serif !important;
-        }
-
-        /* iframe 로딩 개선 */
-        iframe {
-          border: none;
-          outline: none;
-        }
-
-        /* 버튼 클릭 확실히 하기 */
-        button {
-          pointer-events: auto !important;
-          font-family: 'Pretendard', sans-serif !important;
+        /* 폰트 강제 적용 */
+        * {
+          font-family: 'Pretendard', system-ui, sans-serif !important;
         }
       `}</style>
     </>
