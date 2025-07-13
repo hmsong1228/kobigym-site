@@ -92,6 +92,9 @@ export default function AboutSection() {
           <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
             전문 <span className="text-red-600">지도진</span>
           </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto font-medium">
+            최고 수준의 전문 지도진과 함께 안전하고 효과적인 트레이닝을 경험하세요
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
